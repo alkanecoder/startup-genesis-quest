@@ -1,0 +1,159 @@
+
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { CharacterType } from '@/types/game';
+import { User, Users, Clock, DollarSign } from 'lucide-react';
+
+const CharacterSelection = ({ onStartGame }: { onStartGame: (character: CharacterType, sector: string) => void }) => {
+  const [selectedCharacter, setSelectedCharacter] = useState<CharacterType | null>(null);
+  const [selectedSector, setSelectedSector] = useState<string>('');
+
+  const characters = [
+    {
+      type: 'student' as CharacterType,
+      title: 'The Student',
+      description: 'Young, ambitious, and full of energy. Time is your greatest asset.',
+      resources: { time: 90, network: 20, cash: 10 },
+      color: 'from-blue-500 to-purple-600',
+      icon: User
+    },
+    {
+      type: 'corporate' as CharacterType,
+      title: 'The Corporate',
+      description: 'Industry insider with connections and capital. Network is power.',
+      resources: { time: 50, network: 80, cash: 70 },
+      color: 'from-green-500 to-teal-600',
+      icon: Users
+    },
+    {
+      type: 'freelancer' as CharacterType,
+      title: 'The Freelancer',
+      description: 'Balanced skills and moderate resources. Jack of all trades.',
+      resources: { time: 80, network: 50, cash: 40 },
+      color: 'from-orange-500 to-red-600',
+      icon: Clock
+    },
+    {
+      type: 'exfounder' as CharacterType,
+      title: 'The Ex-Founder',
+      description: 'Been there, done that. Rich in experience and connections.',
+      resources: { time: 30, network: 90, cash: 80 },
+      color: 'from-purple-500 to-pink-600',
+      icon: DollarSign
+    }
+  ];
+
+  const sectors = [
+    'Technology', 'Healthcare', 'E-commerce', 'Fintech', 'Education', 
+    'Gaming', 'Food & Beverage', 'Travel', 'Fashion', 'Green Tech'
+  ];
+
+  const getResourceColor = (value: number) => {
+    if (value >= 70) return 'text-green-600 bg-green-50';
+    if (value >= 40) return 'text-orange-600 bg-orange-50';
+    return 'text-red-600 bg-red-50';
+  };
+
+  const getResourceLevel = (value: number) => {
+    if (value >= 70) return 'High';
+    if (value >= 40) return 'Medium';
+    return 'Low';
+  };
+
+  const canStart = selectedCharacter && selectedSector;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            Startup Journey
+          </h1>
+          <p className="text-xl text-slate-600">Choose your founder archetype and begin your entrepreneurial adventure</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {characters.map((char) => {
+            const Icon = char.icon;
+            const isSelected = selectedCharacter === char.type;
+            
+            return (
+              <Card
+                key={char.type}
+                className={`cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                  isSelected ? 'ring-4 ring-blue-500 shadow-xl' : 'hover:shadow-lg'
+                }`}
+                onClick={() => setSelectedCharacter(char.type)}
+              >
+                <CardHeader className="text-center pb-4">
+                  <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-r ${char.color} flex items-center justify-center mb-4`}>
+                    <Icon className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-xl font-bold text-slate-800">{char.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-sm text-slate-600 text-center leading-relaxed">{char.description}</p>
+                  
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-slate-700">Time</span>
+                      <Badge className={getResourceColor(char.resources.time)}>
+                        {getResourceLevel(char.resources.time)}
+                      </Badge>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-slate-700">Network</span>
+                      <Badge className={getResourceColor(char.resources.network)}>
+                        {getResourceLevel(char.resources.network)}
+                      </Badge>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-slate-700">Cash</span>
+                      <Badge className={getResourceColor(char.resources.cash)}>
+                        {getResourceLevel(char.resources.cash)}
+                      </Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        <div className="max-w-md mx-auto space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Choose Your Sector
+            </label>
+            <Select value={selectedSector} onValueChange={setSelectedSector}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a sector..." />
+              </SelectTrigger>
+              <SelectContent>
+                {sectors.map((sector) => (
+                  <SelectItem key={sector} value={sector}>
+                    {sector}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Button
+            onClick={() => canStart && onStartGame(selectedCharacter!, selectedSector)}
+            disabled={!canStart}
+            className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+            size="lg"
+          >
+            {canStart ? 'Start Your Journey' : 'Select Character & Sector'}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CharacterSelection;
