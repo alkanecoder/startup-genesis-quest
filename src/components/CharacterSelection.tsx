@@ -17,7 +17,7 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
       title: 'The Student',
       description: 'Young, ambitious, and full of energy. Time is your greatest asset.',
       resources: { time: 90, network: 20, cash: 10 },
-      color: 'from-blue-500 to-purple-600',
+      color: 'from-red-500 to-yellow-600',
       icon: User
     },
     {
@@ -25,7 +25,7 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
       title: 'The Corporate',
       description: 'Industry insider with connections and capital. Network is power.',
       resources: { time: 50, network: 80, cash: 70 },
-      color: 'from-green-500 to-teal-600',
+      color: 'from-yellow-500 to-red-600',
       icon: Users
     },
     {
@@ -33,7 +33,7 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
       title: 'The Freelancer',
       description: 'Balanced skills and moderate resources. Jack of all trades.',
       resources: { time: 80, network: 50, cash: 40 },
-      color: 'from-orange-500 to-red-600',
+      color: 'from-red-600 to-yellow-500',
       icon: Clock
     },
     {
@@ -41,7 +41,7 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
       title: 'The Ex-Founder',
       description: 'Been there, done that. Rich in experience and connections.',
       resources: { time: 30, network: 90, cash: 80 },
-      color: 'from-purple-500 to-pink-600',
+      color: 'from-yellow-600 to-red-500',
       icon: DollarSign
     }
   ];
@@ -52,9 +52,9 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
   ];
 
   const getResourceColor = (value: number) => {
-    if (value >= 70) return 'text-green-600 bg-green-50';
-    if (value >= 40) return 'text-orange-600 bg-orange-50';
-    return 'text-red-600 bg-red-50';
+    if (value >= 70) return 'text-yellow-600 bg-yellow-50';
+    if (value >= 40) return 'text-red-600 bg-red-50';
+    return 'text-slate-600 bg-slate-50';
   };
 
   const getResourceLevel = (value: number) => {
@@ -66,11 +66,13 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
   const canStart = selectedCharacter && selectedSector;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-yellow-50 p-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            Startup Journey
+          <h1 className="text-5xl font-bold text-slate-800 mb-4 leading-tight">
+            <span className="bg-gradient-to-r from-red-600 to-yellow-600 bg-clip-text text-transparent">
+              Startup Journey
+            </span>
           </h1>
           <p className="text-xl text-slate-600">Choose your founder archetype and begin your entrepreneurial adventure</p>
         </div>
@@ -84,7 +86,7 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
               <Card
                 key={char.type}
                 className={`cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-xl ${
-                  isSelected ? 'ring-4 ring-blue-500 shadow-xl' : 'hover:shadow-lg'
+                  isSelected ? 'ring-4 ring-red-500 shadow-xl' : 'hover:shadow-lg'
                 }`}
                 onClick={() => setSelectedCharacter(char.type)}
               >
@@ -145,7 +147,7 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
           <Button
             onClick={() => canStart && onStartGame(selectedCharacter!, selectedSector)}
             disabled={!canStart}
-            className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+            className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 transition-all duration-300"
             size="lg"
           >
             {canStart ? 'Start Your Journey' : 'Select Character & Sector'}

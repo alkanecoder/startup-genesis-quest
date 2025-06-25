@@ -14,31 +14,31 @@ const ResourceDashboard = ({ resources }: ResourceDashboardProps) => {
       key: 'time' as keyof Resources,
       label: 'Time',
       icon: Clock,
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-50',
-      textColor: 'text-blue-700'
+      color: 'from-red-500 to-red-600',
+      bgColor: 'bg-red-50',
+      textColor: 'text-red-700'
     },
     {
       key: 'network' as keyof Resources,
       label: 'Network',
       icon: Users,
-      color: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-50',
-      textColor: 'text-green-700'
+      color: 'from-yellow-500 to-yellow-600',
+      bgColor: 'bg-yellow-50',
+      textColor: 'text-yellow-700'
     },
     {
       key: 'cash' as keyof Resources,
       label: 'Cash',
       icon: DollarSign,
-      color: 'from-orange-500 to-orange-600',
-      bgColor: 'bg-orange-50',
-      textColor: 'text-orange-700'
+      color: 'from-red-600 to-yellow-500',
+      bgColor: 'bg-yellow-50',
+      textColor: 'text-red-700'
     }
   ];
 
   const getResourceStatus = (value: number) => {
-    if (value >= 70) return { status: 'Excellent', color: 'text-green-600' };
-    if (value >= 50) return { status: 'Good', color: 'text-blue-600' };
+    if (value >= 70) return { status: 'Excellent', color: 'text-yellow-600' };
+    if (value >= 50) return { status: 'Good', color: 'text-red-600' };
     if (value >= 30) return { status: 'Fair', color: 'text-orange-600' };
     if (value >= 10) return { status: 'Low', color: 'text-red-600' };
     return { status: 'Critical', color: 'text-red-700' };

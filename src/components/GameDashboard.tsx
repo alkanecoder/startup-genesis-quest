@@ -38,20 +38,20 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
   const gameComplete = gameState.currentArc >= 6;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-yellow-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-slate-200">
+      <div className="bg-white shadow-sm border-b border-yellow-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-yellow-600 bg-clip-text text-transparent">
                 Startup Journey
               </h1>
               <div className="flex items-center gap-4 mt-2">
-                <Badge variant="outline" className="text-sm">
+                <Badge variant="outline" className="text-sm border-red-200 text-red-700">
                   {characterTitles[gameState.character]}
                 </Badge>
-                <Badge variant="outline" className="text-sm">
+                <Badge variant="outline" className="text-sm border-yellow-200 text-yellow-700">
                   {gameState.sector}
                 </Badge>
               </div>
@@ -59,7 +59,7 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
             <Button
               onClick={onResetGame}
               variant="outline"
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 border-red-200 text-red-700 hover:bg-red-50"
             >
               <RotateCcw className="w-4 h-4" />
               New Game
@@ -83,12 +83,12 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
                   <div className="text-center space-y-4">
                     <div className="text-4xl">🎉</div>
                     <div>
-                      <h3 className="font-bold text-green-600 text-lg">Congratulations!</h3>
+                      <h3 className="font-bold text-yellow-600 text-lg">Congratulations!</h3>
                       <p className="text-sm text-slate-600 mt-2">
                         You've completed your startup journey!
                       </p>
                     </div>
-                    <Button onClick={onResetGame} className="w-full">
+                    <Button onClick={onResetGame} className="w-full bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700">
                       Start New Journey
                     </Button>
                   </div>
@@ -108,7 +108,7 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
                     <Button
                       onClick={() => setShowDecision(true)}
                       disabled={gameState.arcProgress[gameState.currentArc] >= 100}
-                      className="w-full"
+                      className="w-full bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700"
                     >
                       Make Decision
                     </Button>

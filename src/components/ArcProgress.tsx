@@ -15,37 +15,37 @@ const ArcProgress = ({ currentArc, arcProgress }: ArcProgressProps) => {
       title: 'Find Your Big Idea',
       description: 'Discover your breakthrough concept and validate the market need',
       icon: '💡',
-      color: 'from-blue-500 to-purple-600'
+      color: 'from-red-500 to-yellow-600'
     },
     {
       title: 'Build Your Dream Team',
       description: 'Recruit co-founders and key team members who share your vision',
       icon: '👥',
-      color: 'from-purple-500 to-pink-600'
+      color: 'from-yellow-500 to-red-600'
     },
     {
       title: 'Build MVP & Get Users',
       description: 'Create your minimum viable product and acquire first customers',
       icon: '🚀',
-      color: 'from-pink-500 to-red-600'
+      color: 'from-red-600 to-yellow-500'
     },
     {
       title: 'Survive the Grind',
       description: 'Navigate challenges, iterate on feedback, and maintain momentum',
       icon: '💪',
-      color: 'from-red-500 to-orange-600'
+      color: 'from-yellow-600 to-red-500'
     },
     {
       title: 'Secure Investment',
       description: 'Pitch to investors and raise funding to scale your business',
       icon: '💰',
-      color: 'from-orange-500 to-yellow-600'
+      color: 'from-red-500 to-yellow-600'
     },
     {
       title: 'Scale & Exit',
       description: 'Grow rapidly and plan your successful exit strategy',
       icon: '🏆',
-      color: 'from-yellow-500 to-green-600'
+      color: 'from-yellow-500 to-red-600'
     }
   ];
 
@@ -72,9 +72,9 @@ const ArcProgress = ({ currentArc, arcProgress }: ArcProgressProps) => {
                   key={index}
                   className={`transition-all duration-300 ${
                     status === 'current'
-                      ? 'ring-2 ring-blue-500 shadow-lg'
+                      ? 'ring-2 ring-red-500 shadow-lg'
                       : status === 'completed'
-                      ? 'bg-green-50 border-green-200'
+                      ? 'bg-yellow-50 border-yellow-200'
                       : 'opacity-75'
                   }`}
                 >
@@ -87,7 +87,11 @@ const ArcProgress = ({ currentArc, arcProgress }: ArcProgressProps) => {
                         <div>
                           <Badge
                             variant={status === 'completed' ? 'default' : status === 'current' ? 'secondary' : 'outline'}
-                            className="mb-2"
+                            className={`mb-2 ${
+                              status === 'completed' ? 'bg-yellow-600 text-white' : 
+                              status === 'current' ? 'bg-red-100 text-red-700' : 
+                              'border-slate-300'
+                            }`}
                           >
                             Arc {index + 1}
                           </Badge>
@@ -98,9 +102,9 @@ const ArcProgress = ({ currentArc, arcProgress }: ArcProgressProps) => {
                       </div>
                       <div className="flex-shrink-0">
                         {status === 'completed' ? (
-                          <CheckCircle className="w-6 h-6 text-green-600" />
+                          <CheckCircle className="w-6 h-6 text-yellow-600" />
                         ) : status === 'current' ? (
-                          <Clock className="w-6 h-6 text-blue-600" />
+                          <Clock className="w-6 h-6 text-red-600" />
                         ) : (
                           <Circle className="w-6 h-6 text-slate-400" />
                         )}
@@ -128,7 +132,7 @@ const ArcProgress = ({ currentArc, arcProgress }: ArcProgressProps) => {
                     
                     {status === 'current' && progress < 100 && (
                       <div className="text-center">
-                        <Badge variant="secondary" className="animate-pulse">
+                        <Badge variant="secondary" className="animate-pulse bg-red-100 text-red-700">
                           Active Phase
                         </Badge>
                       </div>
