@@ -13,7 +13,7 @@ const CTASection = ({ onStartGame }: CTASectionProps) => {
       <Card className="bg-gradient-to-br from-slate-50 to-red-50 border-2 border-red-200 shadow-xl">
         <CardHeader className="text-center pb-4">
           <CardTitle className="text-3xl font-bold text-slate-900 mb-4">
-            🎬 Ready to Start Your Journey?
+            Ready to Start Your Journey?
           </CardTitle>
           <p className="text-xl text-slate-700 italic">
             "You've come far, my boy."

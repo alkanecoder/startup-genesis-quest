@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Homepage from '@/components/Homepage';
 import CharacterSelection from '@/components/CharacterSelection';
 import GameDashboard from '@/components/GameDashboard';
-import { GameState, CharacterType, GameArc } from '@/types/game';
+import { GameState, CharacterType } from '@/types/game';
 
 const Index = () => {
   const [showHomepage, setShowHomepage] = useState(true);
@@ -29,10 +29,10 @@ const Index = () => {
     setShowHomepage(false);
   };
 
-  const startNewGame = (character: CharacterType, sector: string) => {
+  const startNewGame = (character: CharacterType) => {
     const newGameState: GameState = {
       character,
-      sector,
+      sector: 'Technology', // Default sector since we removed sector selection
       resources: getStartingResources(character),
       currentArc: 0,
       arcProgress: Array(6).fill(0),

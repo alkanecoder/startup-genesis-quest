@@ -3,26 +3,26 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const FeaturesSection = () => {
   const characters = [
-    { emoji: '🧑', title: 'Student', description: 'Young, broke, but full of energy and time' },
-    { emoji: '👔', title: 'Corporate Professional', description: 'Money and network, but limited time' },
-    { emoji: '💻', title: 'Freelancer', description: 'Balanced resources, jack of all trades' },
-    { emoji: '💡', title: 'Ex-Founder', description: 'Been there, done that, rich in experience' }
+    { title: 'Student', description: 'Young, broke, but full of energy and time' },
+    { title: 'Corporate Professional', description: 'Money and network, but limited time' },
+    { title: 'Freelancer', description: 'Balanced resources, jack of all trades' },
+    { title: 'Ex-Founder', description: 'Been there, done that, rich in experience' }
   ];
 
   const gameFlow = [
-    '💡 Idea',
-    '👥 Team', 
-    '🚀 Product',
-    '😤 Grind',
-    '💰 Investment',
-    '🏆 Exit'
+    'Idea',
+    'Team', 
+    'Product',
+    'Grind',
+    'Investment',
+    'Exit'
   ];
 
   const startingStats = [
-    '💰 Money',
-    '🧠 Mental Health', 
-    '🧲 Customers',
-    '💼 Investor Relations'
+    'Money',
+    'Mental Health', 
+    'Customers',
+    'Investor Relations'
   ];
 
   return (
@@ -30,7 +30,7 @@ const FeaturesSection = () => {
       {/* Choose Who You Are */}
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-slate-900 mb-4">
-          🧑‍🎓 Choose Who You Are
+          Choose Who You Are
         </h2>
         <p className="text-xl text-center text-slate-600 mb-12">
           Before the game starts:
@@ -40,7 +40,6 @@ const FeaturesSection = () => {
           {characters.map((char, index) => (
             <Card key={index} className="bg-white border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 text-center">
               <CardHeader className="pb-4">
-                <div className="text-4xl mb-3">{char.emoji}</div>
                 <CardTitle className="text-lg text-slate-900">{char.title}</CardTitle>
               </CardHeader>
               <CardContent>
@@ -67,7 +66,7 @@ const FeaturesSection = () => {
       {/* Gameplay Flow */}
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold text-center text-slate-900 mb-8">
-          📈 Gameplay Flow
+          Gameplay Flow
         </h2>
         
         <Card className="bg-white border-slate-200">

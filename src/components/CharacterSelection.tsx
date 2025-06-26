@@ -3,13 +3,11 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CharacterType } from '@/types/game';
 import { User, Users, Clock, DollarSign } from 'lucide-react';
 
-const CharacterSelection = ({ onStartGame }: { onStartGame: (character: CharacterType, sector: string) => void }) => {
+const CharacterSelection = ({ onStartGame }: { onStartGame: (character: CharacterType) => void }) => {
   const [selectedCharacter, setSelectedCharacter] = useState<CharacterType | null>(null);
-  const [selectedSector, setSelectedSector] = useState<string>('');
 
   const characters = [
     {
@@ -46,11 +44,6 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
     }
   ];
 
-  const sectors = [
-    'Technology', 'Healthcare', 'E-commerce', 'Fintech', 'Education', 
-    'Gaming', 'Food & Beverage', 'Travel', 'Fashion', 'Green Tech'
-  ];
-
   const getResourceColor = (value: number) => {
     if (value >= 70) return 'text-yellow-600 bg-yellow-50';
     if (value >= 40) return 'text-red-600 bg-red-50';
@@ -62,8 +55,6 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
     if (value >= 40) return 'Medium';
     return 'Low';
   };
-
-  const canStart = selectedCharacter && selectedSector;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-yellow-50 p-6">
@@ -125,32 +116,14 @@ const CharacterSelection = ({ onStartGame }: { onStartGame: (character: Characte
           })}
         </div>
 
-        <div className="max-w-md mx-auto space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">
-              Choose Your Sector
-            </label>
-            <Select value={selectedSector} onValueChange={setSelectedSector}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a sector..." />
-              </SelectTrigger>
-              <SelectContent>
-                {sectors.map((sector) => (
-                  <SelectItem key={sector} value={sector}>
-                    {sector}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
+        <div className="max-w-md mx-auto">
           <Button
-            onClick={() => canStart && onStartGame(selectedCharacter!, selectedSector)}
-            disabled={!canStart}
+            onClick={() => selectedCharacter && onStartGame(selectedCharacter)}
+            disabled={!selectedCharacter}
             className="w-full py-3 text-lg font-semibold bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700 transition-all duration-300"
             size="lg"
           >
-            {canStart ? 'Start Your Journey' : 'Select Character & Sector'}
+            {selectedCharacter ? 'Start Your Journey' : 'Select Character'}
           </Button>
         </div>
       </div>

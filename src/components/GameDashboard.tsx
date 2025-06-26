@@ -8,7 +8,7 @@ import { GameState } from '@/types/game';
 import ResourceDashboard from '@/components/ResourceDashboard';
 import ArcProgress from '@/components/ArcProgress';
 import DecisionEngine from '@/components/DecisionEngine';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, ArrowRight } from 'lucide-react';
 
 interface GameDashboardProps {
   gameState: GameState;
@@ -26,16 +26,27 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
     exfounder: 'The Ex-Founder'
   };
 
-  const currentArcTitle = [
+  const arcTitles = [
     'Find Your Big Idea',
     'Build Your Dream Team',
     'Build MVP & Get Users',
     'Survive the Grind',
     'Secure Investment',
     'Scale & Exit'
-  ][gameState.currentArc];
+  ];
 
+  const currentArcTitle = arcTitles[gameState.currentArc];
   const gameComplete = gameState.currentArc >= 6;
+  const arcCompleted = gameState.arcProgress[gameState.currentArc] >= 100;
+
+  const handleNextArc = () => {
+    if (arcCompleted && gameState.currentArc < 5) {
+      setGameState({
+        ...gameState,
+        currentArc: gameState.currentArc + 1
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-yellow-50">
@@ -50,9 +61,6 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
               <div className="flex items-center gap-4 mt-2">
                 <Badge variant="outline" className="text-sm border-red-200 text-red-700">
                   {characterTitles[gameState.character]}
-                </Badge>
-                <Badge variant="outline" className="text-sm border-yellow-200 text-yellow-700">
-                  {gameState.sector}
                 </Badge>
               </div>
             </div>
@@ -105,13 +113,24 @@ const GameDashboard = ({ gameState, setGameState, onResetGame }: GameDashboardPr
                       </div>
                       <Progress value={gameState.arcProgress[gameState.currentArc]} className="h-2" />
                     </div>
-                    <Button
-                      onClick={() => setShowDecision(true)}
-                      disabled={gameState.arcProgress[gameState.currentArc] >= 100}
-                      className="w-full bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700"
-                    >
-                      Make Decision
-                    </Button>
+                    
+                    {arcCompleted && gameState.currentArc < 5 ? (
+                      <Button
+                        onClick={handleNextArc}
+                        className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+                      >
+                        <ArrowRight className="w-4 h-4 mr-2" />
+                        Next Arc
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => setShowDecision(true)}
+                        disabled={gameState.arcProgress[gameState.currentArc] >= 100}
+                        className="w-full bg-gradient-to-r from-red-600 to-yellow-600 hover:from-red-700 hover:to-yellow-700"
+                      >
+                        Make Decision
+                      </Button>
+                    )}
                   </div>
                 )}
               </CardContent>

@@ -7,7 +7,7 @@ const StatsSection = () => {
   return (
     <div className="max-w-4xl mx-auto mb-20">
       <h2 className="text-4xl font-bold text-center text-slate-900 mb-4">
-        🎯 Choose Your Mode
+        Choose Your Mode
       </h2>
       
       <div className="grid md:grid-cols-2 gap-8">
@@ -21,7 +21,7 @@ const StatsSection = () => {
           </div>
           <CardHeader className="pb-4">
             <CardTitle className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-              ✅ Classic Mode
+              Classic Mode
               <span className="text-sm font-normal text-slate-600 italic">(for beginners)</span>
             </CardTitle>
           </CardHeader>
@@ -48,7 +48,7 @@ const StatsSection = () => {
           </div>
           <CardHeader className="pb-4">
             <CardTitle className="text-2xl font-bold text-slate-700 flex items-center gap-2">
-              🔒 Chaotic Mode
+              Chaotic Mode
               <span className="text-sm font-normal text-slate-500 italic">(coming soon)</span>
             </CardTitle>
           </CardHeader>
